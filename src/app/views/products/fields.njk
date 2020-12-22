@@ -1,0 +1,70 @@
+<div class="item">
+    <div>Categoria</div>
+    <select name="category_id">
+        {% for category in categories %}
+        <option value="{{ category.id }}" {% if product.category_id == "{{ category.id }}" %}
+        selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+    </select>
+</div> 
+
+<div class="item">
+    <div>Nome</div>
+    <input type="text" name="name" value="{{ product.name }}" required>
+</div>
+
+<div class="item">
+    <div>Descrição</div>
+    <textarea name="description" required>{{ product.description }}</textarea>
+</div>
+
+<div class="item">
+    <div>Fotos</div>
+    <div id="photos-section">
+        <div id="photos-preview">
+            {% if files %}
+            {% for image in files %}
+            <div class="photo" id="{{ image.id }}">
+                <img src="{{ image.src }}" alt="Imagem de {{ product.name }}">
+                <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
+            </div>
+            {% endfor %}
+            <input type="hidden" name="removed_photos">
+            {% endif %}
+        </div>
+        <div id="photos-upload">
+            <input type="file" name="photos" id="photos-input" accept="image/*" multiple
+            onchange="PhotosUpload.handlePhotoInput(event)">
+            <p><i class="material-icons">collections</i>Selecione até 6 fotos</p>
+        </div>
+    </div>
+</div>
+
+{% if product.old_price %}
+<input type="hidden" name="old_price" value="{{ product.old_price }}">
+{% endif %}
+
+<div class="item">
+    <div>Preço</div>
+    <input type="text" name="price" min="0" value="{{ product.price }}" onkeydown="Mask.apply(this, 'formatBRL')" required>
+</div>
+
+<div class="item">
+    <div>Quantidade</div>
+    <input type="number" name="quantity" min="0" value="{{ product.quantity }}" placeholder="Estoque disponível" required>
+</div>
+
+{% if product.status == 1 or product.status == 0 %}
+<div class="item">
+    <div>Status</div>
+    <div>
+        <input type="checkbox" name="status" class="switch" value="{{ product.status }}"
+        {% if product.status == 1 %}
+        checked
+        {% endif %}>
+        <label for="status">
+        Disponibilidade
+        </label>
+    </div>
+</div>
+{% endif %}

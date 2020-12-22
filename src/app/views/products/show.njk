@@ -1,0 +1,59 @@
+{% extends 'layout.njk' %}
+
+{% block content %}
+<section class="product-single container">
+    <div class="gallery">
+        <div class="highlight">
+            {% if not files %}
+            <img src="https://placehold.it/500x500?text=PRODUTO%20SEM%20FOTO" alt="Foto de {{ product.name }}">
+            {%else%}
+            <img src="{{files[0].src}}" alt="Imagem de {{product.name}}" onclick="Lightbox.open()">
+            {% endif %}
+        </div>
+        <div class="gallery-preview">
+            {% for image in files %}
+            <img src="{{image.src}}" alt="Imagem de {{product.name}}"
+            {% if loop.index0 == 0 %}
+            class="active"
+            {% endif %}
+            onclick="ImageGallery.setImage(event)"
+            >
+            {% endfor %}
+        </div>
+        <div class="lightbox" onclick="Lightbox.close()">
+            <img src="{{files[0].src}}" alt="{{product.name}}">
+            <i class="material-icons" onclick="Lightbox.close()">close</i>
+        </div>
+    </div>
+
+    <div class="info">
+        <strong class="title">{{product.name}}</strong>
+        
+        <span class="publish-date">
+            {% if product.created_at == product.updated_at %}
+            Publicado em {{product.published.date}} às {{product.published.time}}
+            {%else%}
+            Atualizado em {{product.published.date}} às {{product.published.time}}
+            {% endif %}
+        </span>
+
+        <div class="description">
+        <p>{{product.description}}</p>
+        </div>
+
+        <div class="price-buy">
+        <span class="price">
+            <strong>{{product.price}}</strong>
+        {% if product.old_price != product.price and product.old_price > product.price %}
+        <div class="old-price">{{product.old_price}}</div>
+        {% endif %}
+        </span>
+        {% if product.status == 0 or product.quantity == 0 %}
+        <button class="buy" style="filter: saturate(0); cursor: not-allowed;" disabled><i class="material-icons">shopping_cart</i>Indisponível</button>
+        {%else%}
+        <button class="buy"><i class="material-icons">shopping_cart</i>Comprar</button>
+        {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

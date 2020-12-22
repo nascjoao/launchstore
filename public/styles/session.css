@@ -1,0 +1,23 @@
+section.login {
+    max-width: 400px;
+}
+
+section.login footer {
+    background: none;
+    padding: 0;
+    padding-top: 25px;
+    margin-top: 25px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #d3d3d3;
+}
+
+section.login footer a {
+    color: black;
+    opacity: .6;
+}
+
+section.login footer a:hover {
+    text-decoration: underline;
+}

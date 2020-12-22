@@ -1,0 +1,79 @@
+@keyframes messageIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    } 
+    
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes messageOut {
+    from {
+        opacity: 1;
+    } 
+    
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes messageTimeOut {
+    from {
+        width: 0;
+
+    } 
+    
+    to {
+        width: calc(100% - 6px);
+    }
+}
+
+.message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    /* opacity: 1; */
+
+    padding: 15px;
+    margin: 5px;
+    max-width: 400px;
+    color: white;
+    
+    border-radius: 5px;
+    
+    z-index: 100;
+
+    animation: messageIn 400ms, messageOut 200ms 5s forwards ease-in-out;
+}
+
+.message i {
+    margin-right: 10px;
+}
+
+.message::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: white;
+
+    bottom: 2px;
+    left: 3px;
+
+    border-radius: 0 0 5px 5px;
+
+    animation: messageTimeOut 5s forwards ease-in-out;
+}
+
+.message.error {
+    background-color: var(--error);
+}
+
+.message.success {
+    background-color: var(--success);
+}

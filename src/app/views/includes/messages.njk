@@ -1,0 +1,13 @@
+{% if error %}
+<div class="message error">
+    <i class="material-icons">error_outline</i>
+    Ooops, parece que {{error}}
+</div>
+{% endif %}
+
+{% if success %}
+<div class="message success">
+    <i class="material-icons">check</i>
+    Perfeito! {{success}}
+</div>
+{% endif %}

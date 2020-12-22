@@ -1,0 +1,34 @@
+{% extends 'layout.njk' %}
+
+{% import 'includes/section-products.njk' as section %}
+
+{% block content %}
+
+    <div class="search-products container">
+
+    <aside>
+        <strong class="title">{{search.term}}</strong>
+        {% if products.length == 0 %}
+        <p class="results">Nenhum resultado foi encontrado para o termo pesquisado.</p>
+        {% elseif products.length == 1 %}
+        <p class="results">{{search.total}} resultado</p>
+        {% else %}
+        <p class="results">{{search.total}} resultados</p>
+        {% endif %}
+
+        {% if products.length != 0 %}
+        <div class="categories">
+            <strong class="title">Categorias</strong>
+            <ul>
+                {% for category in categories %}
+                <a href="/products/search?filter={{search.term}}&category={{category.id}}"><li>{{category.name}}</li></a>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </aside>
+
+    {{section.products('', 'searched', products)}}
+    </div>
+
+{% endblock content %}

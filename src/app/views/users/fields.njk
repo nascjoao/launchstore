@@ -1,0 +1,36 @@
+<div class="item">
+    <div>Nome</div>
+    <input type="text" name="name" value="{{ user.name }}" required>
+</div>
+
+<div class="item">
+    <div>E-mail</div>
+    <input type="email" name="email" value="{{ user.email }}" onblur="Validate.apply(this, 'isEmail')" required>
+</div>
+
+<div class="item">
+    <div>Senha</div>
+    <input type="password" name="password">
+</div>
+
+{% if not user.id %}
+<div class="item">
+    <div>Repita a senha</div>
+    <input type="password" name="passwordRepeat" required>
+</div>
+{% endif %}
+
+<div class="item">
+    <div>CPF / CNPJ</div>
+    <input type="text" name="cpf_cnpj" onkeydown="Mask.apply(this, 'cpfCnpj')" onblur="Validate.apply(this, 'isCpfCnpj')" value="{{ user.cpf_cnpj }}" required>
+</div>
+
+<div class="item">
+    <div>CEP</div>
+    <input type="text" name="cep" onkeydown="Mask.apply(this, 'cep')" onblur="Validate.apply(this, 'isCep')" value="{{ user.cep }}" required>
+</div>
+
+<div class="item">
+    <div>Endereço</div>
+    <input type="text" name="address" value="{{ user.address }}" required>
+</div>
